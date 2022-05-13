@@ -1,0 +1,52 @@
+/**
+ * <p>Copyright (c) 2003-2004 100do.cn</p>
+ * <p>All right reserved.</p>
+ *
+ * <p>Name:			ZpgameBean.java</p>
+ * <p>Description:	数据库操作类, 访问数据库连接池	
+ * <p>Company:		深圳市达华通信息技术有限公司</p>
+ * <p>Page:			http://www.100do.cn/</p>
+ * @author:			Jimwong
+ * @version:		1.0
+ */
+
+package bean.zpgame;
+
+import com.fei.db.*;
+import com.fei.pub.Tools;
+import java.io.PrintStream;
+import java.util.ArrayList;
+
+public class ZpgameBean {
+	
+	SQL db;
+	String origin;
+
+	public ZpgameBean() {
+		db = null;
+		db = JFactory.getJCon(origin).getSQL();
+	}
+
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
+
+	public JResult select(String sql) {
+		return db.select(sql);
+	}
+
+	public JResult select(String sql, int iPageNo, int iPageLen) {
+		return db.select(sql, iPageNo, iPageLen);
+	}
+
+	public int update(String sql) {
+		return db.update(sql);
+	}
+	
+	protected void finalize() throws Throwable {
+		if(db != null) db.close();
+	}
+	
+}
+
+
